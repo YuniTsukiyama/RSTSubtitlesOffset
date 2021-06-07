@@ -20,10 +20,8 @@ def is_num(s):
 
 # Convert \date to a string with .rst format
 def to_str(date):
-    return "{0:02}:{1:02}:{2},{3:3.3}".format(date.hour,
-                                              date.minute,
-                                              date.second,
-                                              str(date.microsecond))
+    return "{0:02}:{1:02}:{2},{3:3.3}".format(
+            date.hour, date.minute, date.second, str(date.microsecond))
 
 with open(sys.argv[1], 'r', encoding='utf-8') as ifile:
 
@@ -33,6 +31,8 @@ with open(sys.argv[1], 'r', encoding='utf-8') as ifile:
     # Time offset
     offset = timedelta(minutes=int(sys.argv[2]), seconds=int(sys.argv[3]))
     # Index offset
+    while (len(lines[0]) > 0) and not(is_digit(lines[0][0])):
+        lines[0] = lines[0][1:]
     offset_s = int(lines[0]) - 1;
 
     for line in lines:
